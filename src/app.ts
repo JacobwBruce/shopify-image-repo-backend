@@ -3,6 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
 import uploadRoutes from './routes/uploadRoutes';
+import { errorHandler, notFound } from './middleware/errorMiddleware';
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ const app = express();
 app.get('/', (req: express.Request, res: express.Response) => {
     res.send('API is running...');
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.use('/api/upload', uploadRoutes);
 

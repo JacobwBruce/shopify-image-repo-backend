@@ -1,6 +1,3 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
 import users from './data/users';
 import User from './models/userModel';
 import connectDB from './config/db';
