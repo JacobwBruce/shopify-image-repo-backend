@@ -5,12 +5,15 @@ import connectDB from './config/db';
 import uploadRoutes from './routes/uploadRoutes';
 import { errorHandler, notFound } from './middleware/errorMiddleware';
 import userRoutes from './routes/userRoutes';
+import cors from 'cors';
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
