@@ -1,7 +1,6 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
-import UserRequest from '../interfaces/UserRequest';
 import Image from '../models/imageModel';
 const router = express.Router();
 

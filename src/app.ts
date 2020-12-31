@@ -21,7 +21,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.send('API is running...');
 });
 
-app.use('/api/upload', uploadRoutes);
+app.use('/api/uploads', uploadRoutes);
 app.use('/api/users', userRoutes);
 
 app.use(notFound);
