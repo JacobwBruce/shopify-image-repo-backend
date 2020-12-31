@@ -5,7 +5,7 @@ import express from 'express';
 // @access  Public
 export const getImage = (req: express.Request, res: express.Response) => {
     const url = req.params.url;
-    res.sendFile(`/uploads/${url}`, {
+    res.sendFile(`/images/${url}`, {
         root: './',
     });
 };

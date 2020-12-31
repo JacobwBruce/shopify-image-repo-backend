@@ -6,6 +6,7 @@ import uploadRoutes from './routes/uploadRoutes';
 import { errorHandler, notFound } from './middleware/errorMiddleware';
 import userRoutes from './routes/userRoutes';
 import cors from 'cors';
+import imageRoutes from './routes/imageRoutes';
 
 dotenv.config();
 
@@ -23,12 +24,13 @@ app.get('/', (req: express.Request, res: express.Response) => {
 
 app.use('/api/uploads', uploadRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/images', imageRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
