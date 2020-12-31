@@ -35,13 +35,6 @@ router.post('/', upload.single('image'), async (req: express.Request, res: expre
     res.send(`/${req.file.path}`);
 });
 
-router.get('/:url', (req: express.Request, res: express.Response) => {
-    const url = req.params.url;
-    res.sendFile(`/uploads/${url}`, {
-        root: './',
-    });
-});
-
 router.post('/saveimage', async (req: express.Request, res: express.Response) => {
     try {
         const image = new Image({
