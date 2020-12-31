@@ -44,15 +44,19 @@ router.get('/:url', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/saveimage', async (req: express.Request, res: express.Response) => {
-    const image = new Image({
-        user: req.body.userId,
-        url: req.body.url,
-        description: req.body.description,
-        tags: req.body.tags,
-    });
+    try {
+        const image = new Image({
+            user: req.body.userId,
+            url: req.body.url,
+            description: req.body.description,
+            tags: req.body.tags,
+        });
 
-    const createdImage = await image.save();
-    res.status(201).json(createdImage);
+        const createdImage = await image.save();
+        res.status(201).json(createdImage);
+    } catch (error) {
+        res.status(400).json(error);
+    }
 });
 
 export default router;
