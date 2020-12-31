@@ -3,21 +3,9 @@ import mongoose, { HookNextFunction } from 'mongoose';
 export interface ImageDocument extends Document {
     user: string;
     url: string;
-    description: string;
-    tags: Array<String>;
+    description?: string;
+    tags?: Array<String>;
 }
-
-const tagSchema = new mongoose.Schema(
-    {
-        tag: {
-            type: String,
-            required: true,
-        },
-    },
-    {
-        timestamps: true,
-    }
-);
 
 const imageSchema = new mongoose.Schema(
     {
@@ -33,7 +21,7 @@ const imageSchema = new mongoose.Schema(
         description: {
             type: String,
         },
-        tags: [tagSchema],
+        tags: [String],
     },
     {
         timestamps: true,
