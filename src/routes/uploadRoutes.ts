@@ -34,4 +34,11 @@ router.post('/', upload.single('image'), (req: express.Request, res: express.Res
     res.send(`/${req.file.path}`);
 });
 
+router.get('/:url', (req: express.Request, res: express.Response) => {
+    const url = req.params.url;
+    res.sendFile(`/uploads/${url}`, {
+        root: './',
+    });
+});
+
 export default router;
