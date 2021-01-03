@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import Image from '../models/imageModel';
+import fs from 'fs';
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -49,6 +50,11 @@ router.post('/saveimage', async (req: express.Request, res: express.Response) =>
     } catch (error) {
         res.status(400).json(error);
     }
+});
+
+router.delete('/:filename', async (req: express.Request, res: express.Response) => {
+    fs.unlinkSync(`./images/${req.params.filename}`);
+    res.json({ message: 'Image removed' });
 });
 
 export default router;
