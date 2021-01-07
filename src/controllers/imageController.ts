@@ -45,3 +45,19 @@ export const deleteImage = async (req: UserRequest, res: express.Response) => {
         res.json({ message: 'Image deleted' });
     }
 };
+
+// @desc    edit an image from id
+// @route   PUT /api/images/:id
+// @access  Private
+export const editImageById = async (req: UserRequest, res: express.Response) => {
+    const image = await Image.findById(req.params.url);
+    if (!image) {
+        res.status(404);
+        throw new Error('Image not found');
+    } else {
+        image.tags = req.body.tags;
+        image.description = req.body.description;
+        const updatedImage = image.save();
+        res.json(updatedImage);
+    }
+};
