@@ -7,6 +7,7 @@ import { errorHandler, notFound } from './middleware/errorMiddleware';
 import userRoutes from './routes/userRoutes';
 import cors from 'cors';
 import imageRoutes from './routes/imageRoutes';
+import keepAlive from './utils/keepAlive';
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ app.use(errorHandler);
 
 const __dirname = path.resolve();
 app.use('/images', express.static(path.join(__dirname, '/images')));
+
+keepAlive();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
