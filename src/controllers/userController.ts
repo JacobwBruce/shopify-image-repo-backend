@@ -85,3 +85,13 @@ export const updateUserProfile = asyncHandler(async (req: UserRequest, res: expr
         throw new Error('User not found');
     }
 });
+
+export const getUserById = asyncHandler(async (req: UserRequest, res: express.Response) => {
+    const user = await User.findById(req.params.id).select('-password');
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
