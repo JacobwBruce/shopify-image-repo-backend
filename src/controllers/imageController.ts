@@ -13,11 +13,21 @@ export const getImage = (req: express.Request, res: express.Response) => {
     });
 };
 
-// @desc    get all images
+// @desc    get images
 // @route   GET /api/images/
 // @access  Public
-export const getAllImages = async (req: express.Request, res: express.Response) => {
-    const images = await Image.find({});
+export const getImages = async (req: express.Request, res: express.Response) => {
+    const keyword = req.query.keyword
+        ? {
+              tags: {
+                  $regex: req.query.keyword,
+                  $options: 'i',
+              },
+          }
+        : {};
+
+    //@ts-ignore
+    const images = await Image.find(...keyword);
 
     res.json(images.reverse());
 };

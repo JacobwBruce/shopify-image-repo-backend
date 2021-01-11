@@ -2,7 +2,7 @@ import express, { Router } from 'express';
 import {
     deleteImage,
     editImageById,
-    getAllImages,
+    getImages,
     getImage,
     getUserImages,
 } from '../controllers/imageController';
@@ -11,6 +11,6 @@ const router: Router = express.Router();
 
 router.get('/user', protect, getUserImages);
 router.route('/:url').get(getImage).delete(protect, deleteImage).put(protect, editImageById);
-router.get('/', getAllImages);
+router.get('/', getImages);
 
 export default router;
