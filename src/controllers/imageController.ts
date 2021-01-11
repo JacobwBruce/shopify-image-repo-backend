@@ -27,7 +27,7 @@ export const getImages = async (req: express.Request, res: express.Response) => 
         : {};
 
     //@ts-ignore
-    const images = await Image.find(...keyword);
+    const images = await Image.find(keyword);
 
     res.json(images.reverse());
 };
