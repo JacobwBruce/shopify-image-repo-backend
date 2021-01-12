@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import UserRequest from '../interfaces/UserRequest';
 import User from '../models/userModel';
 import generateToken from '../utils/generateToken';
+import axios from 'axios';
 
 // @desc    Authenticate user & get token
 // @route   POST /api/users/login
@@ -41,6 +42,12 @@ export const registerUser = asyncHandler(async (req: express.Request, res: expre
     });
 
     if (user) {
+        axios.post('https://nodejs-emailing-bot.herokuapp.com/sendEmail', {
+            email,
+            heading: 'Thank you for signing up!',
+            message: `Hello ${user.name}, \n\nThank you for signing up for Imageify at https://image-repo.netlify.app \n\nIf you did not register this email address please email me at Jacobwbruce@hotmail.com`,
+        });
+
         res.status(201);
         delete user._doc.password;
         res.json({ ...user._doc, token: generateToken(user._id) });
