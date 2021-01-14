@@ -1,17 +1,6 @@
 import express from 'express';
 import UserRequest from '../interfaces/UserRequest';
 import Image from '../models/imageModel';
-import fs from 'fs';
-
-// @desc    get an image by file name
-// @route   GET /api/images/:url
-// @access  Public
-export const getImage = (req: express.Request, res: express.Response) => {
-    const url = req.params.url;
-    res.sendFile(`/images/${url}`, {
-        root: './',
-    });
-};
 
 // @desc    get images
 // @route   GET /api/images/
@@ -50,7 +39,6 @@ export const deleteImage = async (req: UserRequest, res: express.Response) => {
         res.status(404);
         throw new Error('Image not found');
     } else {
-        fs.unlinkSync(`.${image.url}`);
         await image.remove();
         res.json({ message: 'Image deleted' });
     }
