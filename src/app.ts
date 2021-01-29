@@ -33,7 +33,8 @@ app.use(errorHandler);
 const __dirname = path.resolve();
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
-keepAlive();
+// Uncomment to kepp heroku server from idling
+// keepAlive();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
